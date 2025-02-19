@@ -35,11 +35,10 @@ defineProps<{
 
 .card {
   --data-value: "?";
-
   position: relative;
   display: flex;
   width: 100%;
-  max-width: 50px;
+  max-width: 17%;
   aspect-ratio: 0.7 / 1;
   background: var(--color-white);
   border-radius: 4px;

@@ -2,24 +2,14 @@
 @import 'tailwindcss';
 
 #app {
-  margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
+  height: 100vh;
   font-weight: normal;
   align-items: center;
-  display: flex;
   justify-content: center;
-}
+  display: flex;
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+  @media (min-width: 1024px) {
+    padding: 4rem;
   }
 }

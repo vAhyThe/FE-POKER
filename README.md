@@ -1,61 +1,94 @@
 # FE-POKER
 
-This template should help get you started developing with Vue 3 in Vite.
+A modern poker game implementation built with Vue 3 and TypeScript.
 
-## Recommended IDE Setup
+## Features
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Real-time poker gameplay
+- Modern and responsive user interface
+- Built with Vue 3 and TypeScript
+- Secure and reliable game logic
 
-## Type Support for `.vue` Imports in TS
+## Demo
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+### Live Demo
 
-## Customize configuration
+Check out our live demo at: [https://poker.tomasvahala.com/](https://poker.tomasvahala.com/)
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## Tech Stack
 
-## Project Setup
+- Vue 3
+- TypeScript
+- Vite
+- Vitest for unit testing
+- Cypress for E2E testing
+- ESLint for code quality
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm (v6 or higher)
+
+### Installation
+
+1. Clone the repository
+
+```sh
+git clone https://github.com/your-username/fe-poker.git
+cd fe-poker
+```
+
+2. Install dependencies
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Development
+
+Run the development server:
 
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### Building for Production
+
+Build the project:
 
 ```sh
 npm run build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### Testing
+
+Run unit tests:
 
 ```sh
 npm run test:unit
 ```
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+Run E2E tests:
 
 ```sh
 npm run test:e2e:dev
 ```
 
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
+### Linting
 
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-npm run build
-npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
+Check and fix code style:
 
 ```sh
 npm run lint
 ```
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Vue.js team for the amazing framework
+- The open source community
