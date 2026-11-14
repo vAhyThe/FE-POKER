@@ -1,6 +1,7 @@
 <template>
   <div class="p-4 h-full w-full flex flex-col justify-between">
-    <nav class="text-right text-2xl">
+    <nav class="text-right text-2xl flex justify-between">
+      <strong>Name: {{ gameStore.playerName }}</strong>
       <strong>Life Points: <span class="w-[39px] inline-block">{{ gameStore.lifePoints }}</span></strong>
     </nav>
     <div class="field">
@@ -38,6 +39,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
+import axios from "axios";
 import { useRouter } from "vue-router";
 import { useGameStore } from "@/stores/gameStore";
 import { useHandGenerator } from "@/composables/useHandGenerator";
@@ -59,6 +61,18 @@ const startGame = () => {
   startTimer();
 };
 
+const saveGameToBackend = async () => {
+  try {
+    await axios.post("http://localhost:4000/games", {
+      playerName: gameStore.playerName, // ✅ Ukládáme jméno hráče
+      gameNumber: gameStore.totalGames + 1,
+      correctAnswers: gameStore.correctAnswers,
+    });
+  } catch (error) {
+    console.error("❌ Error saving game:", error);
+  }
+};
+
 const startTimer = () => {
   if (timer !== null) return;
   timer = setInterval(() => {
@@ -68,13 +82,14 @@ const startTimer = () => {
       clearInterval(timer!);
       timer = null;
       gameStore.endGame();
+      saveGameToBackend()
       router.push({ name: "joke" });
     }
   }, 1000);
 };
 
 const updateTitle = () => {
-  document.title = `Life Points: ${gameStore.lifePoints} | Poker Game`;
+  document.title = `Life Points: ${gameStore.lifePoints} | ${gameStore.playerName} game`;
 };
 
 const checkAnswer = (answer: string) => {

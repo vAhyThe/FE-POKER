@@ -2,6 +2,8 @@ import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
 
 export const useGameStore = defineStore('gameStore', () => {
+  const rangeCards = ref([])
+  const playerName = ref<string>(localStorage.getItem('playerName') || '')
   const lifePoints = ref<number>(parseInt(localStorage.getItem('lifePoints') || '100'))
   const correctAnswers = ref<number>(parseInt(localStorage.getItem('correctAnswers') || '0'))
   const totalGames = ref<number>(parseInt(localStorage.getItem('totalGames') || '0'))
@@ -9,13 +11,17 @@ export const useGameStore = defineStore('gameStore', () => {
     JSON.parse(localStorage.getItem('gameHistory') || '[]'),
   )
   const gameFinished = ref<boolean>(localStorage.getItem('gameFinished') === 'true')
+  const setPlayerName = (name: string) => {
+    playerName.value = name
+  }
 
-  watch([lifePoints, correctAnswers, totalGames, gameFinished, gameHistory], () => {
+  watch([lifePoints, correctAnswers, totalGames, gameFinished, gameHistory, playerName], () => {
     localStorage.setItem('lifePoints', lifePoints.value.toString())
     localStorage.setItem('correctAnswers', correctAnswers.value.toString())
     localStorage.setItem('totalGames', totalGames.value.toString())
     localStorage.setItem('gameFinished', gameFinished.value.toString())
     localStorage.setItem('gameHistory', JSON.stringify(gameHistory.value))
+    localStorage.setItem('playerName', playerName.value)
   })
 
   const endGame = () => {
@@ -36,5 +42,16 @@ export const useGameStore = defineStore('gameStore', () => {
     gameHistory.value = savedHistory ? JSON.parse(savedHistory) : []
   }
 
-  return { lifePoints, correctAnswers, totalGames, gameHistory, gameFinished, resetGame, endGame }
+  return {
+    lifePoints,
+    correctAnswers,
+    totalGames,
+    gameHistory,
+    gameFinished,
+    playerName,
+    rangeCards,
+    resetGame,
+    endGame,
+    setPlayerName,
+  }
 })

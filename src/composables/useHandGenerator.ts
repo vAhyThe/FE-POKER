@@ -2,14 +2,17 @@ import { ref } from 'vue'
 import hands from '@/components/data/hands'
 import suits from '@/components/data/suits'
 import cardValues from '@/components/data/cardValues'
+import { useGameStore } from '@/stores/gameStore'
+const gameStore = useGameStore()
 
 export function useHandGenerator() {
+  console.log(1, gameStore.rangeCards)
   const chosenHand = ref<string>('')
   const cards = ref<{ value: string; seed: (typeof suits)[number] }[]>([])
   const handOptions = ref<string[]>([])
 
   const generateHand = () => {
-    chosenHand.value = hands[Math.floor(Math.random() * hands.length)]
+    chosenHand.value = gameStore.rangeCards[Math.floor(Math.random() * gameStore.rangeCards.length)]
 
     switch (chosenHand.value) {
       case 'High Card':
@@ -88,7 +91,12 @@ const getPair = () => {
 
 const getTwoPairs = () => {
   const firstPair = getPair()
-  const secondPair = getPair()
+  let secondPair
+
+  do {
+    secondPair = getPair()
+  } while (secondPair[0].value === firstPair[0].value) // Znovu generuje, pokud mají stejnou hodnotu
+
   const kicker = getRandomCards(1, false, false)
   return [...firstPair.slice(0, 2), ...secondPair.slice(0, 2), ...kicker]
 }
